@@ -1,0 +1,494 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+class Person
+{ //open class Person
+ Scanner sc = new Scanner(System.in);
+ int d,m,y;
+ String name,contactn,email_id;
+ //default constructor
+ Person()
+ {
+ d=0;
+ m=0;
+ y=0;
+ name="";
+ conatctn="";
+ email_id="";
+ }
+
+ //parameterised constructor
+ Person(int d,int m,int y,String name,String contactn,String email_id)
+ {
+ this.d=d;
+ this. m=m;
+ this. y=y;
+ this.name=name;
+ this.contactn=contactn;
+ this.email_id=email_id;
+
+ }
+
+ void accept()
+ { //open accept()
+ System.out.println("\nEnter your details:");
+ do
+ {
+ System.out.println("Enter your name:");
+ name=sc.nextLine();
+ int c=0;
+ for(int j=0;j<name.length();j++)
+ {
+ if(Character.isDigit(name.charAt(j)))
+ c++;
+ }
+ if(c!=0)
+ {
+ System.out.println("wrong name entered");
+ continue;
+ }
+ else
+ break;
+ }while(true);
+ System.out.println("Enter your date of birth:");
+ do
+ {
+ System.out.println("Enter your birthdate only dd:");
+ d=sc.nextInt();
+ if(d>0 && d<=31)
+ break;
+ else
+ {
+ System.out.println("wrong date entered try again");
+ continue;
+ }
+ }while(true);
+ do
+ {
+ System.out.println("Enter your birth month only mm:");
+ m=sc.nextInt();
+ if(m>0 && m<=12)
+ break;
+ else
+ {
+ System.out.println("wrong month entered try again");
+ continue;
+ }
+ }while(true);
+ do
+ {
+ System.out.println("Enter your birth year only yyyy:");
+ y=sc.nextInt();
+ if(y>1945 && y<=2005)
+ break;
+ else
+ {
+ System.out.println("wrong year entered try again");
+ continue;
+ }
+ }while(true);
+ do
+ {
+ System.out.println("\nEnter your contact number:");
+ contactn=sc.next();
+ int count=0;
+ for(int j=0;j<contactn.length();j++)
+ {
+ if(Character.isDigit(contactn.charAt(j)))
+ {
+ count++;
+ }
+ }
+ if(count==10)
+ break;
+ else
+ {
+ System.out.println("wrong contact number try again");
+ continue;
+ }
+ }while(true);
+ do
+ {
+ System.out.println("Enter your email id:");
+ email_id=sc.next();
+ if(email_id.indexOf('@')==-1 || email_id.indexOf(".com")==-1)
+ {
+ System.out.println("Wrong email id entered try again");
+ continue;
+ }
+ else
+ break;
+ }while(true);
+} // close accept() in Person
+//display() in Person
+ void display()
+ { //display() opens
+ System.out.println("\n");
+ System.out.println("Employee Personal Details\n");
+ System.out.println("Name : "+name);
+ System.out.println("Date of birth : "+d+"/"+m+"/"+y);
+ System.out.println("Contact number :"+contactn);
+ System.out.println("Email id :"+email_id);
+ }
+
+} //close class Person
+class Employee extends Person
+{ //open class Employee
+ char gr;
+ int empid;
+ double bsalary,gsalary,hra,ta,da;
+ Scanner ob = new Scanner(System.in);
+
+ //constructor overloading
+ //default constructor
+ Employee()
+ {
+ gr='';
+ empid=0;
+ bsalary=0.0;
+ gsalary=0.0;
+ hra=0.0;
+ ta=0.0;
+ da=0.0;
+ }
+
+ //parameterised constructor
+ Employee(int d1,int m1,int y1,String n1,String cn1,String em1,char g2)
+ {
+ super(d1,m1,y1,n1,cn1,em1);
+ //super keyword calls the constructor in the parent class
+ gr=g2;
+ empid=1006;
+ }
+
+ void calculate()
+ { //open calculate()
+
+ if(gr=='A'||gr=='a')
+ {
+ bsalary=8000;
+ ta=2000;
+ }
+ else if(gr=='B'||gr=='b')
+ {
+ bsalary=7000;
+ ta=1500;
+ }
+ else if(gr=='C'||gr=='c')
+ {
+ bsalary=6000;
+ ta=1000;
+ }
+ else if(gr=='D'||gr=='d')
+ {
+ bsalary=5000;
+ ta=500;
+ }
+ hra=0.20*bsalary;
+ da=0.5*bsalary;
+ gsalary=bsalary+hra+da+ta;
+ }//close calculate()
+
+ void calculate(int g)
+ { // open function calculate(int g)
+ if(gr=='A'||gr=='a')
+ {
+ bsalary=8000;
+ ta=2000;
+ }
+ else if(gr=='B'||gr=='b')
+ {
+ bsalary=7000;
+ ta=1500;
+ }
+ else if(gr=='C'||gr=='c')
+ {
+ bsalary=6000;
+ ta=1000;
+ }
+ else if(gr=='D'||gr=='d')
+ {
+ bsalary=5000;
+ ta=500;
+ }
+ hra=0.20*bsalary;
+ da=0.5*bsalary;
+ gsalary=bsalary+hra+da+ta;
+ }//close function calculate(int g)
+
+ void accept()
+ {
+ super.accept(); //calls the function accept in class Person
+ System.out.println("Enter employee id");
+ empid=ob.nextInt();
+ System.out.println("Enter your grade:");
+ gr=ob.next().charAt(0);
+
+ }
+ void display()
+ {
+ super.display(); //calls the function display in class Person
+ System.out.println("Employee id:"+empid);
+ System.out.println("Employee grade:"+gr);
+ System.out.println("Gross Salary of Employee is:"+gsalary);
+ }
+ void increment(char gn)
+ {
+ if(gn == 'A' || gn == 'a')
+ {
+ empid='A';
+ bsalary=8000;
+ ta=2000;
+ }
+ if(gn == 'B' || gn == 'b')
+ {
+ empid='B';
+ bsalary=7000;
+ ta=1500;
+ }
+ if(gn == 'C' || gn == 'c')
+ {
+ empid='C';
+ bsalary=6000;
+ ta=1000;
+ }
+ hra=0.20*bsalary;
+ da=0.5*bsalary;
+ gsalary=bsalary+hra+da+ta;
+ System.out.println("New Salary of employee is : "+gsalary);
+
+ }
+} // close child class Employee
+public class Main extends Employee
+{ //open Main class
+public static void main(String[] args)
+{ //open main()
+ Scanner obj=new Scanner(System.in);
+ char g1,gn;
+ int n,count=0,index;
+ int employee_id;
+
+ System.out.println("Enter the number of employees:");
+ n=obj.nextInt();
+
+ Employee emp[]= new Employee[n];
+ /*To show constructor overloading the first employees's data has been
+hardcoded
+ she can be considered the manager*/
+
+ System.out.println("\nEnter first employee grade");
+ g1=obj.next().charAt(0);
+ emp[0]=new Employee(12,022,1980,"Simran
+Deshmukh","simran123@gmail.com","7876980675",g1);
+ System.out.println("\nEnter the employee id:");
+ emp[0].empid=obj.nextInt();
+ emp[0].calculate(g1);
+ emp[0].display();
+
+
+
+ for(int i=1;i<n;i++)
+ {
+ emp[i]=new Employee();
+ emp[i].accept();
+ emp[i].calculate();
+ emp[i].display();
+ }
+
+
+ System.out.println("\nEnter the employee id whose salary you want to
+increment");
+ employee_id=obj.nextInt();
+
+ int i;
+ for(i=0;i<=n-1;i++)
+ {
+ if(emp[i].empid==employee_id)
+ {
+ count++;
+ break;
+ }
+
+ }
+ if(count==0)
+ {
+ System.out.println("Employee id not found!");
+ }
+ else
+ {
+ System.out.println("Enter new grade of employee:");
+ gn=obj.next().charAt(0);
+ emp[i].increment(gn);
+ }
+ } //close main()
+} //close Main class
+****OUTPUT****
+Enter the number of employees:
+6
+Enter first employee grade
+B
+Enter the employee id:
+100
+Employee Personal Details
+Name : Simran Deshmukh
+Date of birth : 12/18/1980
+Contact number :simran123@gmail.com
+Email id :7876980675
+Employee id:100
+Employee grade:B
+Gross Salary of Employee is:13400.0
+Enter your details:
+Enter your name:
+Prapti Patil
+Enter your date of birth:
+Enter your birthdate only dd:
+89
+wrong date entered try again
+Enter your birthdate only dd:
+8
+Enter your birth month only mm:
+9
+Enter your birth year only yyyy:
+2010
+wrong year entered try again
+Enter your birth year only yyyy:
+2001
+Enter your contact number:
+9867896789
+Enter your email id:
+prapti123@gmail.com
+Enter employee id
+102
+Enter your grade:
+C
+Employee Personal Details
+Name : Prapti Patil
+Date of birth : 8/9/2001
+Contact number :9867896789
+Email id :prapti123@gmail.com
+Employee id:102
+Employee grade:C
+Gross Salary of Employee is:11200.0
+Enter your details:
+Enter your name:
+Amit Deshmukh
+Enter your date of birth:
+Enter your birthdate only dd:
+23
+Enter your birth month only mm:
+4
+Enter your birth year only yyyy:
+1989
+Enter your contact number:
+897867567
+wrong contact number try again
+Enter your contact number:
+7867567898
+Enter your email id:
+amit@
+Wrong email id entered try again
+Enter your email id:
+amit@gmail.com
+Enter employee id
+101
+Enter your grade:
+B
+Employee Personal Details
+Name : Amit Deshmukh
+Date of birth : 23/4/1989
+Contact number :7867567898
+Email id :amit@gmail.com
+Employee id:101
+Employee grade:B
+Gross Salary of Employee is:13400.0
+Enter your details:
+Enter your name:
+Satwik Gadekar
+Enter your date of birth:
+Enter your birthdate only dd:
+4
+Enter your birth month only mm:
+8
+Enter your birth year only yyyy:
+1980
+Enter your contact number:
+7895689770
+Enter your email id:
+satwik89@yahoo.com
+Enter employee id
+103
+Enter your grade:
+A
+Employee Personal Details
+Name : Satwik Gadekar
+Date of birth : 4/8/1980
+Contact number :7895689770
+Email id :satwik89@yahoo.com
+Employee id:103
+Employee grade:A
+Gross Salary of Employee is:15600.0
+Enter your details:
+Enter your name:
+Pallavi Buwa
+Enter your date of birth:
+Enter your birthdate only dd:
+12
+Enter your birth month only mm:
+11
+Enter your birth year only yyyy:
+2000
+Enter your contact number:
+9445566324
+Enter your email id:
+pallavibuwa34@gmail.com
+Enter employee id
+104
+Enter your grade:
+d
+Employee Personal Details
+Name : Pallavi Buwa
+Date of birth : 12/11/2000
+Contact number :9445566324
+Email id :pallavibuwa34@gmail.com
+Employee id:104
+Employee grade:d
+Gross Salary of Employee is:9000.0
+Enter your details:
+Enter your name:
+Sagar Chavan
+Enter your date of birth:
+Enter your birthdate only dd:
+9
+Enter your birth month only mm:
+12
+Enter your birth year only yyyy:
+1978
+Enter your contact number:
+9878985600
+Enter your email id:
+sagar@gmail.com
+Enter employee id
+105
+Enter your grade:
+b
+Employee Personal Details
+Name : Sagar Chavan
+Date of birth : 9/12/1978
+Contact number :9878985600
+Email id :sagar@gmail.com
+Employee id:105
+Employee grade:b
+Gross Salary of Employee is:13400.0
+Enter the employee id whose salary you want to increment
+105
+Enter new grade of employee:
+A
+New Salary of employee is : 15600.0
+Employee Personal Details
+Name : Sagar Chawan
+Date of birth : 9/12/1978
+Contact number :9878985600
+Email id :sagar@gmail.com
+Employee id:65
+Employee grade:b
+Gross Salary of Employee is:15600.0
