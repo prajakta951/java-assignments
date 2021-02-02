@@ -1,0 +1,216 @@
+import java.util.Scanner;
+class Complex
+{
+int real,imaginary;
+ Complex()
+ {
+ this.real=0;
+ this.imaginary=0;
+ }
+ Complex(int real,int imaginary)
+ {
+ this.real=real;
+ this.imaginary=imaginary;
+ }
+ Complex add(Complex C1,Complex C2)
+ {
+ Complex temp1=new Complex();
+ temp1.real=C1.real+C2.real;
+ temp1.imaginary=C1.imaginary+C2.imaginary;
+ return(temp1);
+ }
+ Complex subtract(Complex C1,Complex C2)
+ {
+ Complex temp2=new Complex();
+ temp2.real=C1.real-C2.real;
+ temp2.imaginary=C1.imaginary-C2.imaginary;
+ return(temp2);
+ }
+
+ /*z1 = p + iq and z2 = r + is are two complex numbers
+ then their product z1z2 is defined as
+ z1z2 = (pr - qs) + i(ps + qr)*/
+
+ Complex multiply(Complex C1, Complex C2)
+ {
+ Complex temp3=new Complex();
+ temp3.real = C1.real*C2.real - (C1.imaginary*C2.imaginary);
+ temp3.imaginary = C1.real*C2.imaginary + C1.imaginary*C2.real;
+ return (temp3);
+ }
+ Complex divide(Complex C1, Complex C2)
+ {
+ //on dividing a+bi by c+id we get (ac+bd)/(c^2+d^2) + ((bc-ad)/(c^2+d^2))i.
+ Complex temp3=new Complex();
+ temp3.real =(C1.real*C2.real + C1.imaginary*C2.imaginary)/((C2.real*C2.real)+
+(C2.imaginary*C2.imaginary));
+ temp3.imaginary = (C1.imaginary*C2.real -
+C1.real*C2.imaginary)/((C2.real*C2.real)+(C2.imaginary*C2.imaginary));
+ return (temp3);
+ }
+ void printComplex()
+ {
+ System.out.println("Complex Number:"+real+"+"+imaginary+"i");
+ }
+}
+public class Main
+{
+public static void main(String[] args) {
+ Scanner sc=new Scanner(System.in);
+ int num1r,num1i,num2r,num2i,choice;
+ System.out.println("*****MENU*****");
+ System.out.println("1.Add 2 complex numbers");
+ System.out.println("2.Subtract 2 complex numbers");
+ System.out.println("3.Multiply 2 complex numbers");
+ System.out.println("4.Divide 2 complex numbers");
+ System.out.println("5.Exit");
+ do
+ {
+System.out.println("\nEnter your choice:");
+choice=sc.nextInt();
+ if(choice==5)
+ continue;
+ System.out.println("Enter first complex number");
+ System.out.println("Enter real part of first complex number");
+ num1r=sc.nextInt();
+ System.out.println("Enter imaginary part of first complex number");
+ num1i=sc.nextInt();
+ System.out.println("Enter second complex number");
+ System.out.println("Enter real part of second complex number");
+ num2r=sc.nextInt();
+ System.out.println("Enter imaginary part of second complex
+number");
+ num2i=sc.nextInt();
+ Complex C1=new Complex(num1r,num1i);
+ C1.printComplex();
+ Complex C2=new Complex(num2r,num2i);
+ C2.printComplex();
+ Complex C3=new Complex();
+switch(choice)
+{
+ case 1:C3=C3.add(C1,C2);
+ System.out.println("Sum is:");
+ C3.printComplex();
+ break;
+ case 2:C3=C3.subtract(C1,C2);
+ System.out.println("Difference is:");
+ C3.printComplex();
+ break;
+ case 3:C3=C3.multiply(C1,C2);
+ System.out.println("Product is:");
+ C3.printComplex();
+ break;
+ case 4:C3=C3.divide(C1,C2);
+ System.out.println("Quotient is:");
+ C3.printComplex();
+ break;
+ default:System.out.println("Incorrect choice try again");
+}
+}
+while(choice!=5);
+System.out.println("Exit");
+}
+}
+****OUTPUT****
+****MENU*****
+1.Add 2 complex numbers
+2.Subtract 2 complex numbers
+3.Multiply 2 complex numbers
+4.Divide 2 complex numbers
+5.Exit
+Enter your choice:
+4
+Enter first complex number
+Enter real part of first complex number
+9
+Enter imaginary part of first complex number
+6
+Enter second complex number
+Enter real part of second complex number
+3
+Enter imaginary part of second complex number
+2
+Complex Number:9+6i
+Complex Number:3+2i
+Quotient is:
+Complex Number:3+0i
+Enter your choice:
+3
+Enter first complex number
+Enter real part of first complex number
+2
+Enter imaginary part of first complex number
+4
+Enter second complex number
+Enter real part of second complex number
+1
+Enter imaginary part of second complex number
+2
+Complex Number:2+4i
+Complex Number:1+2i
+Product is:
+Complex Number:-6+8i
+Enter your choice:
+2
+Enter first complex number
+Enter real part of first complex number
+4
+Enter imaginary part of first complex number
+7
+Enter second complex number
+Enter real part of second complex number
+5
+Enter imaginary part of second complex number
+5
+Complex Number:4+7i
+Complex Number:5+5i
+Difference is:
+Complex Number:-1+2i
+Enter your choice:
+1
+Enter first complex number
+Enter real part of first complex number
+3
+Enter imaginary part of first complex number
+3
+Enter second complex number
+Enter real part of second complex number
+4
+Enter imaginary part of second complex number
+2
+Complex Number:3+3i
+Complex Number:4+2i
+Sum is:
+Complex Number:7+5i
+Enter your choice:
+5
+Exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
